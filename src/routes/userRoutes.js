@@ -1,5 +1,5 @@
 const express = require("express");
-const { createUser, getAllUsers, login, updateUser } = require("../controllers/userController");
+const { createUser, getAllUsers, login, updateUser, deleteUser } = require("../controllers/userController");
 const router = express.Router();
 
 // Route to register a new user
@@ -13,5 +13,8 @@ router.post("/login", login); // Handle login
 
 // Route to update a user
 router.put("/users/:id", updateUser); // Update user by ID
+
+// Route to delete a user
+router.delete("/users/:id", deleteUser); // Delete user by ID
 
 module.exports = router;
