@@ -40,6 +40,11 @@ const Card = sequelize.define("Card", {
     allowNull: false,
     defaultValue: false,
   },
+  holographic: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
   rarity: {
     type: DataTypes.STRING,
     allowNull: false,
