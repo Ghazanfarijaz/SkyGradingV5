@@ -19,6 +19,7 @@ exports.addCard = async (req, res) => {
       language,
       label,
       certificationNumber,
+      holographic,
       address,
       termsAgreed,
       rarity,
