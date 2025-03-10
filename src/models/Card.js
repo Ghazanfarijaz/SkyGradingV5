@@ -55,6 +55,11 @@ const Card = sequelize.define("Card", {
     allowNull: false,
     defaultValue: "N/A",
   },
+  image2: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "N/A",
+  },
   grade: {
     type: DataTypes.INTEGER,
     allowNull: false,

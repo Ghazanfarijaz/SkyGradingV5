@@ -3,7 +3,7 @@ const { Card } = require("../models");
 // Add a new card
 exports.addCard = async (req, res) => {
   try {
-    const { name, set, releaseYear, cardNumber, language, label, certificationNumber, holographic, address, termsAgreed, rarity, image,  grade, subgrade, trackingStatus, rating, trackingID, userId } = req.body;
+    const { name, set, releaseYear, cardNumber, language, label, certificationNumber, holographic, address, termsAgreed, rarity, image, image2, grade, subgrade, trackingStatus, rating, trackingID, userId } = req.body;
 
     // Check if the card already exists
     const existingCard = await Card.findOne({ where: { cardNumber } });
@@ -24,6 +24,7 @@ exports.addCard = async (req, res) => {
       termsAgreed,
       rarity,
       image,
+      image2,
       grade,
       subgrade,
       trackingStatus,
@@ -102,6 +103,7 @@ exports.updateCard = async (req, res) => {
       holographic,
       rarity,
       image,
+      image2,
       grade,
       subgrade,
       trackingStatus,
@@ -129,6 +131,7 @@ exports.updateCard = async (req, res) => {
       holographic,
       rarity,
       image,
+      image2,
       grade,
       subgrade,
       trackingStatus,
