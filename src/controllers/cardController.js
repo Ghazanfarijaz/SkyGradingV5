@@ -3,7 +3,27 @@ const { Card } = require("../models");
 // Add a new card
 exports.addCard = async (req, res) => {
   try {
-    const { name, set, releaseYear, cardNumber, language, label, certificationNumber, holographic, address, termsAgreed, rarity, image, image2, grade, subgrade, trackingStatus, rating, trackingID, userId } = req.body;
+    const {
+      name,
+      set,
+      releaseYear,
+      cardNumber,
+      language,
+      label,
+      certificationNumber,
+      holographic,
+      address,
+      termsAgreed,
+      rarity,
+      image,
+      image2,
+      grade,
+      subgrade,
+      trackingStatus,
+      rating,
+      trackingID,
+      userId,
+    } = req.body;
 
     // Check if the card already exists
     const existingCard = await Card.findOne({ where: { cardNumber } });
@@ -33,21 +53,38 @@ exports.addCard = async (req, res) => {
       userId,
     });
 
-    res.status(201).json({ message: "Card added successfully.", card: newCard });
+    res
+      .status(201)
+      .json({ message: "Card added successfully.", card: newCard });
   } catch (error) {
     console.error("Error adding card:", error);
-    res.status(500).json({ message: "Error adding card.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error adding card.", error: error.message });
   }
 };
 
 // Get all cards
+// exports.getAllCards = async (req, res) => {
+//   try {
+//     const cards = await Card.findAll();
+//     res.status(200).json(cards);
+//   } catch (error) {
+//     console.error("Error fetching cards:", error);
+//     res.status(500).json({ message: "Error fetching cards.", error: error.message });
+//   }
+// };
 exports.getAllCards = async (req, res) => {
   try {
-    const cards = await Card.findAll();
+    const cards = await Card.findAll({
+      order: [["cardnumber", "ASC"]], // You can change 'ASC' to 'DESC' if needed
+    });
     res.status(200).json(cards);
   } catch (error) {
     console.error("Error fetching cards:", error);
-    res.status(500).json({ message: "Error fetching cards.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching cards.", error: error.message });
   }
 };
 
@@ -62,7 +99,9 @@ exports.getCardByCardNumber = async (req, res) => {
     res.status(200).json(card);
   } catch (error) {
     console.error("Error fetching card by card number:", error);
-    res.status(500).json({ message: "Error fetching card.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching card.", error: error.message });
   }
 };
 
@@ -77,15 +116,24 @@ exports.updateCardTrackingStatus = async (req, res) => {
       return res.status(404).json({ message: "Card not found." });
     }
 
-    await Card.update({ trackingStatus, trackingID }, { where: { cardNumber } });
+    await Card.update(
+      { trackingStatus, trackingID },
+      { where: { cardNumber } }
+    );
 
-    res.status(200).json({ message: "Card tracking status updated successfully." });
+    res
+      .status(200)
+      .json({ message: "Card tracking status updated successfully." });
   } catch (error) {
     console.error("Error updating card tracking status:", error);
-    res.status(500).json({ message: "Error updating card tracking status.", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Error updating card tracking status.",
+        error: error.message,
+      });
   }
 };
-
 
 // Update card details
 exports.updateCard = async (req, res) => {
@@ -143,12 +191,11 @@ exports.updateCard = async (req, res) => {
     res.status(200).json({ message: "Card updated successfully.", card });
   } catch (error) {
     console.error("Error updating card details:", error);
-    res.status(500).json({ message: "Error updating card details.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error updating card details.", error: error.message });
   }
 };
-
-
-
 
 // Delete a card by cardNumber
 exports.deleteCardByCardNumber = async (req, res) => {
@@ -164,10 +211,11 @@ exports.deleteCardByCardNumber = async (req, res) => {
     res.status(200).json({ message: "Card deleted successfully." });
   } catch (error) {
     console.error("Error deleting card:", error);
-    res.status(500).json({ message: "Error deleting card.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error deleting card.", error: error.message });
   }
 };
-
 
 exports.getCardByUserId = async (req, res) => {
   const { userId } = req.params;
@@ -200,7 +248,9 @@ exports.getCardByUserIdAndCardNumber = async (req, res) => {
     });
 
     if (!card) {
-      return res.status(404).json({ message: "Card not found for this user and card number." });
+      return res
+        .status(404)
+        .json({ message: "Card not found for this user and card number." });
     }
 
     res.status(200).json(card);
@@ -209,6 +259,3 @@ exports.getCardByUserIdAndCardNumber = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch card.", error });
   }
 };
-
-
-
