@@ -77,7 +77,7 @@ exports.addCard = async (req, res) => {
 exports.getAllCards = async (req, res) => {
   try {
     const cards = await Card.findAll({
-      order: [["cardnumber", "ASC"]], // You can change 'ASC' to 'DESC' if needed
+      order: [["cardNumber", "ASC"]], // You can change 'ASC' to 'DESC' if needed
     });
     res.status(200).json(cards);
   } catch (error) {
@@ -126,12 +126,10 @@ exports.updateCardTrackingStatus = async (req, res) => {
       .json({ message: "Card tracking status updated successfully." });
   } catch (error) {
     console.error("Error updating card tracking status:", error);
-    res
-      .status(500)
-      .json({
-        message: "Error updating card tracking status.",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error updating card tracking status.",
+      error: error.message,
+    });
   }
 };
 
