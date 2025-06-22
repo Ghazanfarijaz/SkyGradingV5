@@ -1,13 +1,14 @@
 const express = require("express");
-const { 
-  addCard, 
-  getAllCards, 
-  getCardByCardNumber, 
-  updateCardTrackingStatus, 
-  deleteCardByCardNumber, 
-  getCardByUserId, 
+const {
+  addCard,
+  getAllCards,
+  getCardByCardNumber,
+  updateCardTrackingStatus,
+  deleteCardByCardNumber,
+  getCardByUserId,
   getCardByUserIdAndCardNumber,
-  updateCard
+  updateCard,
+  getNewOrders,
 } = require("../controllers/cardController");
 
 const router = express.Router();
@@ -32,8 +33,10 @@ router.put("/update/:cardNumber", updateCardTrackingStatus);
 
 router.put("/updateall/:cardNumber", updateCard); // Updated route name
 
-
 // Route to delete card by card number
 router.delete("/delete/:cardNumber", deleteCardByCardNumber);
+
+// Add this with your other routes
+router.get("/orders/new", getNewOrders);
 
 module.exports = router;

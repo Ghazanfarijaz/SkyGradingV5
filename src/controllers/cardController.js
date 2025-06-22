@@ -257,3 +257,25 @@ exports.getCardByUserIdAndCardNumber = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch card.", error });
   }
 };
+
+// Get all cards with termsAgreed = false (new orders)
+exports.getNewOrders = async (req, res) => {
+  try {
+    const cards = await Card.findAll({
+      where: { termsAgreed: false },
+      order: [["cardNumber", "ASC"]], // Optional: keep your existing sorting
+    });
+
+    if (cards.length === 0) {
+      return res.status(404).json({ message: "No new orders found." });
+    }
+
+    res.status(200).json(cards);
+  } catch (error) {
+    console.error("Error fetching new orders:", error);
+    res.status(500).json({
+      message: "Error fetching new orders.",
+      error: error.message,
+    });
+  }
+};
