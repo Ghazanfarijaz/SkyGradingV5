@@ -80,7 +80,7 @@
 //   try {
 //     await sequelize.authenticate();
 //     console.log("Database connected...");
-    
+
 //     await sequelize.sync({ alter: false }); // Synchronize models
 //     console.log("Models synced...");
 
@@ -90,7 +90,6 @@
 //     console.error("Error starting server:", error);
 //   }
 // })();
-
 
 const express = require("express");
 const cors = require("cors");
@@ -118,15 +117,19 @@ app.use("/api/users", userRoutes);
 app.use("/api/cards", cardRoutes);
 
 // Create Order (Stripe PaymentIntent)
-app.post('/create-order', async (req, res) => {
+app.post("/create-order", async (req, res) => {
   const { amount, currency } = req.body;
 
   // Validate input
   if (!amount || isNaN(amount) || amount <= 0) {
-    return res.status(400).json({ error: "Invalid amount. Amount must be a positive number." });
+    return res
+      .status(400)
+      .json({ error: "Invalid amount. Amount must be a positive number." });
   }
-  if (!currency || typeof currency !== 'string') {
-    return res.status(400).json({ error: "Invalid currency. Currency must be a string." });
+  if (!currency || typeof currency !== "string") {
+    return res
+      .status(400)
+      .json({ error: "Invalid currency. Currency must be a string." });
   }
 
   try {
@@ -146,11 +149,11 @@ app.post('/create-order', async (req, res) => {
 });
 
 // Verify Payment (Stripe)
-app.post('/verify-payment', async (req, res) => {
+app.post("/verify-payment", async (req, res) => {
   const { paymentIntentId } = req.body;
 
   // Validate input
-  if (!paymentIntentId || typeof paymentIntentId !== 'string') {
+  if (!paymentIntentId || typeof paymentIntentId !== "string") {
     return res.status(400).send({ error: "Invalid paymentIntentId." });
   }
 
@@ -159,10 +162,10 @@ app.post('/verify-payment', async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
     // Check the payment intent status
-    if (paymentIntent.status === 'succeeded') {
-      res.send({ status: 'success', paymentIntent });
+    if (paymentIntent.status === "succeeded") {
+      res.send({ status: "success", paymentIntent });
     } else {
-      res.status(400).send({ status: 'failure', paymentIntent });
+      res.status(400).send({ status: "failure", paymentIntent });
     }
   } catch (error) {
     console.error("Error verifying payment:", error);
@@ -171,15 +174,19 @@ app.post('/verify-payment', async (req, res) => {
 });
 
 // Create Checkout Session (Stripe Checkout)
-app.post('/create-checkout-session', async (req, res) => {
+app.post("/create-checkout-session", async (req, res) => {
   const { amount, currency, successUrl, cancelUrl } = req.body;
 
   // Validate input
   if (!amount || isNaN(amount) || amount <= 0) {
-    return res.status(400).json({ error: "Invalid amount. Amount must be a positive number." });
+    return res
+      .status(400)
+      .json({ error: "Invalid amount. Amount must be a positive number." });
   }
   if (!currency || typeof currency !== "string") {
-    return res.status(400).json({ error: "Invalid currency. Currency must be a string." });
+    return res
+      .status(400)
+      .json({ error: "Invalid currency. Currency must be a string." });
   }
   if (!successUrl || typeof successUrl !== "string") {
     return res.status(400).json({ error: "Invalid success URL." });
@@ -221,7 +228,7 @@ app.post('/create-checkout-session', async (req, res) => {
   try {
     await sequelize.authenticate();
     console.log("Database connected...");
-    
+
     await sequelize.sync({ alter: false }); // Synchronize models
     console.log("Models synced...");
 

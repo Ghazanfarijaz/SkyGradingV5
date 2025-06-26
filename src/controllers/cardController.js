@@ -279,3 +279,60 @@ exports.getNewOrders = async (req, res) => {
     });
   }
 };
+
+exports.addCardDirect = async (req, res) => {
+  try {
+    const {
+      name,
+      set,
+      releaseYear,
+      cardNumber,
+      language,
+      label,
+      certificationNumber,
+      holographic,
+      address,
+      termsAgreed,
+      rarity,
+      image,
+      image2,
+      grade,
+      subgrade,
+      trackingStatus,
+      rating,
+      trackingID,
+      userId,
+    } = req.body;
+
+    const newCard = await Card.create({
+      name,
+      set,
+      releaseYear,
+      cardNumber,
+      language,
+      label,
+      certificationNumber,
+      holographic,
+      address,
+      termsAgreed,
+      rarity,
+      image,
+      image2,
+      grade,
+      subgrade,
+      trackingStatus,
+      rating,
+      trackingID,
+      userId,
+    });
+
+    res
+      .status(201)
+      .json({ message: "Card added successfully.", card: newCard });
+  } catch (error) {
+    console.error("Error adding card:", error);
+    res
+      .status(500)
+      .json({ message: "Error adding card.", error: error.message });
+  }
+};

@@ -9,12 +9,17 @@ const {
   getCardByUserIdAndCardNumber,
   updateCard,
   getNewOrders,
+  addCardDirect,
 } = require("../controllers/cardController");
 
 const router = express.Router();
 
 // Route to add a new card
 router.post("/add", addCard);
+
+// later added
+// Route to add a new card
+router.post("/addDirect", addCardDirect);
 
 // Route to fetch all cards
 router.get("/", getAllCards);
