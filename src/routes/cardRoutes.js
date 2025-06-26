@@ -36,7 +36,7 @@ router.get("/user/:userId/:cardNumber", getCardByUserIdAndCardNumber);
 // Route to update card tracking status
 router.put("/update/:cardNumber", updateCardTrackingStatus);
 
-router.put("/updateall/:cardNumber", updateCard); // Updated route name
+router.put("/updateall/:id", updateCard); // Updated route name
 
 // Route to delete card by card number
 router.delete("/delete/:cardNumber", deleteCardByCardNumber);
