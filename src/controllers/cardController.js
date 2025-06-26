@@ -136,7 +136,7 @@ exports.updateCardTrackingStatus = async (req, res) => {
 // Update card details
 exports.updateCard = async (req, res) => {
   try {
-    const { cardNumber } = req.params;
+    const { id } = req.params;
     const {
       name,
       set,
@@ -144,6 +144,7 @@ exports.updateCard = async (req, res) => {
       language,
       label,
       certificationNumber,
+      cardNumber,
       address,
       termsAgreed,
       holographic,
@@ -159,7 +160,7 @@ exports.updateCard = async (req, res) => {
     } = req.body;
 
     // Find the card by cardNumber
-    const card = await Card.findOne({ where: { cardNumber } });
+    const card = await Card.findOne({ where: { id } });
     if (!card) {
       return res.status(404).json({ message: "Card not found." });
     }
@@ -172,6 +173,7 @@ exports.updateCard = async (req, res) => {
       language,
       label,
       certificationNumber,
+      cardNumber,
       address,
       termsAgreed,
       holographic,
