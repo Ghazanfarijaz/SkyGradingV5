@@ -17,7 +17,7 @@ const Card = sequelize.define("Card", {
   cardNumber: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true, // Ensure card number is unique
+    //unique: true, // Ensure card number is unique
   },
   language: {
     type: DataTypes.STRING,
@@ -69,7 +69,6 @@ const Card = sequelize.define("Card", {
     type: DataTypes.JSON, // { surface, edging, centering, corners }
     allowNull: true,
     defaultValue: 0,
-    
   },
   trackingStatus: {
     type: DataTypes.STRING,
@@ -93,7 +92,6 @@ const Card = sequelize.define("Card", {
       key: "id",
     },
     allowNull: true,
-    
   },
 });
 
