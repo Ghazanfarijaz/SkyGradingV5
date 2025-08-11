@@ -26,12 +26,12 @@ exports.addCard = async (req, res) => {
     } = req.body;
 
     // Check if the card already exists
-    const existingCard = await Card.findOne({ where: { certificationNumber } });
-    if (existingCard) {
-      return res
-        .status(400)
-        .json({ message: "certification Number number already exists." });
-    }
+    // const existingCard = await Card.findOne({ where: { certificationNumber } });
+    // if (existingCard) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "certification Number number already exists." });
+    // }
 
     const newCard = await Card.create({
       name,
