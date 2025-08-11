@@ -10,6 +10,7 @@ const {
   updateCard,
   getNewOrders,
   addCardDirect,
+  deleteCardById,
 } = require("../controllers/cardController");
 
 const router = express.Router();
@@ -40,7 +41,7 @@ router.put("/updateall/:id", updateCard); // Updated route name
 
 // Route to delete card by card number
 // router.delete("/delete/:cardNumber", deleteCardByCardNumber);
-router.delete("/delete/:id", cardController.deleteCardById);
+router.delete("/delete/:id", deleteCardById);
 
 // Add this with your other routes
 router.get("/orders/new", getNewOrders);
