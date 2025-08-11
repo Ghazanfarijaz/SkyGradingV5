@@ -39,7 +39,8 @@ router.put("/update/:cardNumber", updateCardTrackingStatus);
 router.put("/updateall/:id", updateCard); // Updated route name
 
 // Route to delete card by card number
-router.delete("/delete/:cardNumber", deleteCardByCardNumber);
+// router.delete("/delete/:cardNumber", deleteCardByCardNumber);
+router.delete("/delete/:id", cardController.deleteCardById);
 
 // Add this with your other routes
 router.get("/orders/new", getNewOrders);

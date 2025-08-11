@@ -340,3 +340,22 @@ exports.addCardDirect = async (req, res) => {
       .json({ message: "Error adding card.", error: error.message });
   }
 };
+
+// Update delete function to use ID
+exports.deleteCardById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const card = await Card.findByPk(id);
+    if (!card) {
+      return res.status(404).json({ message: "Card not found." });
+    }
+
+    await card.destroy();
+    res.status(200).json({ message: "Card deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting card:", error);
+    res
+      .status(500)
+      .json({ message: "Error deleting card.", error: error.message });
+  }
+};
